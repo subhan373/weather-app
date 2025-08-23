@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+</head>
+<body style="font-family: Arial; background:#eef; padding:20px;">
+
+  <h2>🌤️ Weather App</h2>
+  <input type="text" id="cityInput" placeholder="Enter city e.g. Lahore" />
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="result" style="margin-top:20px; font-size:18px;"></div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById("cityInput").value.trim();
+      if (!city) {
+        alert("Please enter a city name");
+        return;
+      }
+
+      try {
+        // step 1: geocoding se lat lon lo
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+        const geoData = await geoRes.json();
+
+        if (!geoData.results || geoData.results.length === 0) {
+          document.getElementById("result").innerText = "City not found!";
+          return;
+        }
+
+        const { latitude, longitude, name, country } = geoData.results[0];
+
+        // step 2: weather API call
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`);
+        const weatherData = await weatherRes.json();
+
+        const weather = weatherData.current_weather;
+
+        // step 3: show result
+        document.getElementById("result").innerHTML = `
+          <b>${name}, ${country}</b><br>
+          🌡️ Temp: ${weather.temperature}°C <br>
+          💨 Windspeed: ${weather.windspeed} km/h <br>
+          ⏰ Time: ${weather.time}
+        `;
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("result").innerText = "Error fetching weather data.";
+      }
+    }
+  </script>
+
+</body>
+</html>
