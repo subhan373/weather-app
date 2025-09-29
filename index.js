@@ -18,9 +18,22 @@ async function checkWeather(city){
     document.querySelector(".weather").style.display = "none";
     document.querySelector(".error").style.display = "none";
 
+
+
+    
     const respose = await fetch(apiUrl + city +`&appid=${apiKey}`);
 
     loading.style.display = "none";
+
+
+
+
+
+
+
+
+
+
 
 
 
