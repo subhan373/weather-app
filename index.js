@@ -20,6 +20,11 @@ async function checkWeather(city){
     
     const respose = await fetch(apiUrl + city +`&appid=${apiKey}`);
 
+
+
+
+
+    
     loading.style.display = "none";
 
 
