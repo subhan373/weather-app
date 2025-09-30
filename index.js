@@ -19,6 +19,15 @@ async function checkWeather(city){
 
 
 
+
+
+
+
+
+
+
+
+
     
     
     loading.style.display = "block";
