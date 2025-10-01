@@ -24,7 +24,9 @@ async function checkWeather(city){
 
 
 
+
     
+
    
     if(respose.status == 404){
         document.querySelector(".error").style.display = "block";
