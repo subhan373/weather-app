@@ -22,8 +22,6 @@ async function checkWeather(city){
 
     loading.style.display = "none";
 
-
-    
    
     if(respose.status == 404){
         document.querySelector(".error").style.display = "block";
