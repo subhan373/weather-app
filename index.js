@@ -28,6 +28,7 @@ async function checkWeather(city){
         document.querySelector(".weather").style.display = "none";
     }
 
+
     
     else{
         var data = await respose.json();
