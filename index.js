@@ -31,6 +31,8 @@ async function checkWeather(city){
 
 
 
+    
+
 
 
 
@@ -38,7 +40,7 @@ async function checkWeather(city){
 
 
 
-    
+
     else{
         var data = await respose.json();
 
