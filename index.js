@@ -36,6 +36,10 @@ async function checkWeather(city){
 
 
 
+
+    
+
+
     
 
 
