@@ -18,6 +18,7 @@ searchBox.addEventListener("keydown", (event) => {
 
 
 
+
 async function checkWeather(city){
     
     loading.style.display = "block";
