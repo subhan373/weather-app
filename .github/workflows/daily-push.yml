@@ -2,7 +2,7 @@ name: Daily 10x Auto Push
 
 on:
   schedule:
-    - cron: '0 8 * * *' # Roz 1:00 PM Pakistan time (UTC+5)
+  - cron: '25 11 * * *' # Roz 4:25 PM Pakistan time (UTC+5)
   workflow_dispatch:
 
 jobs:
