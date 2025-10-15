@@ -5,6 +5,9 @@ on:
     - cron: '45 11 * * *' # Roz 4:45 PM Pakistan time (UTC+5)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
@@ -12,18 +15,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update log file
-        run: |
-          echo "Auto update at $(date)" >> daily_log.txt
-
-      - name: Commit changes
+      - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Make 10 commits
+        run: |
           for i in {1..10}
           do
-            echo "Auto push $i at $(date)" >> daily_log.txt
+            echo "Auto update $i at $(date)" >> daily_log.txt
             git add .
             git commit -m "Auto commit $i"
           done
