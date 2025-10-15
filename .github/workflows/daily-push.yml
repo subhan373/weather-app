@@ -2,26 +2,32 @@ name: Daily 10x Auto Push
 
 on:
   schedule:
-  - cron: '25 11 * * *' # Roz 4:25 PM Pakistan time (UTC+5)
+    - cron: '45 11 * * *' # Roz 4:45 PM Pakistan time (UTC+5)
   workflow_dispatch:
 
 jobs:
-  auto-update:
+  auto-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 10 auto commits
+      - name: Update log file
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "Auto update at $(date)" >> daily_log.txt
 
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           for i in {1..10}
           do
-            echo "Run $(date -u) - commit $i" >> daily_log.txt
-            git add daily_log.txt
-            git commit -m "Auto update $i at $(date -u)"
+            echo "Auto push $i at $(date)" >> daily_log.txt
+            git add .
+            git commit -m "Auto commit $i"
           done
 
+      - name: Push changes
+        run: |
           git push
