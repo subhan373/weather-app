@@ -1,0 +1,27 @@
+name: Daily 10x Auto Push
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # Roz 1:00 PM Pakistan time (UTC+5)
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 10 auto commits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for i in {1..10}
+          do
+            echo "Run $(date -u) - commit $i" >> daily_log.txt
+            git add daily_log.txt
+            git commit -m "Auto update $i at $(date -u)"
+          done
+
+          git push
