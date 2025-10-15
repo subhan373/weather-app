@@ -1,8 +1,13 @@
-name: Daily Auto Push (1x clean)
+name: Daily 5x Auto Push
 
 on:
   schedule:
-    - cron: '55 11 * * *' # Roz 4:55 PM Pakistan time (UTC+5)
+    # Roz 5 dafa auto run (Pakistan time)
+    - cron: '0 5 * * *'   # 10:00 AM PKT
+    - cron: '0 8 * * *'   # 1:00 PM PKT
+    - cron: '0 11 * * *'  # 4:00 PM PKT
+    - cron: '0 14 * * *'  # 7:00 PM PKT
+    - cron: '0 17 * * *'  # 10:00 PM PKT
   workflow_dispatch:
 
 permissions:
@@ -23,9 +28,9 @@ jobs:
           git config --global user.name "subhan373"
           git config --global user.email "subhan373@users.noreply.github.com"
 
-      - name: Make daily commit
+      - name: Make auto commit
         run: |
           echo "Auto update at $(date)" >> daily_log.txt
           git add daily_log.txt
-          git commit -m "Daily auto update at $(date)"
+          git commit -m "Auto commit at $(date)"
           git push
