@@ -1,8 +1,8 @@
-name: Daily 10x Auto Push
+name: Daily Auto Push (1x clean)
 
 on:
   schedule:
-    - cron: '45 11 * * *' # Roz 4:45 PM Pakistan time (UTC+5)
+    - cron: '55 11 * * *' # Roz 4:55 PM Pakistan time (UTC+5)
   workflow_dispatch:
 
 permissions:
@@ -20,18 +20,12 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "subhan373"
+          git config --global user.email "subhan373@users.noreply.github.com"
 
-      - name: Make 10 commits
+      - name: Make daily commit
         run: |
-          for i in {1..10}
-          do
-            echo "Auto update $i at $(date)" >> daily_log.txt
-            git add .
-            git commit -m "Auto commit $i"
-          done
-
-      - name: Push changes
-        run: |
+          echo "Auto update at $(date)" >> daily_log.txt
+          git add daily_log.txt
+          git commit -m "Daily auto update at $(date)"
           git push
