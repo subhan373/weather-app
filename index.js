@@ -8,6 +8,8 @@ const weatherIcon = document.querySelector(".weather-icon");
 const loading = document.querySelector(".loading");
 
 
+
+
 searchBox.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     checkWeather(searchBox.value);
