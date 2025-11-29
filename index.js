@@ -15,6 +15,19 @@ searchBox.addEventListener("keydown", (event) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function checkWeather(city) {
   loading.style.display = "block";
   document.querySelector(".weather").style.display = "none";
